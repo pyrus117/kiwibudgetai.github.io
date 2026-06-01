@@ -29,7 +29,7 @@ If you have questions, complaints, or want to exercise your rights (e.g. access 
 
 ## 1. Who we are
 
-The "agency" operating the App for the purposes of the Privacy Act 2020 is the App's publisher (Farrow Counselling / Kiwi Budget AI maintainer), contactable at **tooty.fruity.tooty@gmail.com**.
+The "agency" operating the App for the purposes of the Privacy Act 2020 is the App's publisher (Pyrus117), contactable at **tooty.fruity.tooty@gmail.com**.
 
 The App is published from New Zealand and is primarily intended for New Zealand users (because it integrates with Akahu, the NZ open-banking aggregator). The App is available on Google Play.
 
