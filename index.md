@@ -1,12 +1,7 @@
----
-layout: default
-title: Kiwi Budget AI — Privacy Policy
----
-
 # Kiwi Budget AI — Privacy Policy
 
-**Last updated:** 1 June 2026
-**Effective from:** 1 June 2026
+**Last updated:** 8 July 2026
+**Effective from:** 8 July 2026
 
 This policy explains how the Kiwi Budget AI mobile application ("the App", "we", "us") handles your personal information. It is written to comply with the New Zealand **Privacy Act 2020** and its thirteen Information Privacy Principles (IPPs).
 
@@ -19,8 +14,9 @@ If you would prefer to read this policy in plain English, the **Summary** sectio
 - **Your bank data stays on your phone.** The App connects to your bank accounts through Akahu using tokens that you generate yourself. Those tokens, your account balances, your transactions and all derived data (categorisations, budgets, goals) are stored **only on the device you install the App on**. We do not host them.
 - **AI features call Google Gemini using your own API key.** When you ask the AI assistant a question, or when the App auto-categorises transactions, your transaction description and amount are sent to Google's Gemini API using a key **you** supply. We never see those requests.
 - **You sign in with your Google account.** Sign-in is handled by Google / Firebase Authentication. We receive a unique user ID and the email address you sign in with so we can keep your settings tied to your account.
-- **Ads are served by Google AdMob.** AdMob may collect a device advertising identifier subject to Google's privacy policy and your device's ad personalisation settings.
-- **Bug reports.** If you submit a bug report from the Settings page, the text you write plus your platform/version/user agent is sent to our Firebase database. Your Akahu tokens, Gemini key, and transaction data are **never** included in bug reports.
+- **Ads are served by Google AdMob.** AdMob may collect a device advertising identifier subject to Google's privacy policy and your device's ad personalisation settings. **Pro subscribers do not see ads** and AdMob is disabled for their accounts.
+- **Pro plan (Kiwi Budget Pro).** The App offers an optional paid subscription that removes ads and unlocks the monthly AI insight feature. Subscriptions are managed by RevenueCat, which processes purchase and renewal data through Google Play Billing. RevenueCat receives your anonymised app user ID and purchase tokens. Your bank data, Akahu tokens, and Gemini key are **never** shared with RevenueCat. Premium status is determined from your RevenueCat entitlement — we do not store it separately in the cloud.
+- **Bug reports.** If you submit a bug report from the Settings page, the text you write plus your platform/version/user agent is sent to our Firebase Firestore database. Your Akahu tokens, Gemini key, and transaction data are **never** included in bug reports.
 - **No analytics, no advertising profile built by us, no data sold.** We do not run analytics SDKs, we do not build profiles of you for advertising, and we do not sell, rent, or trade any personal information.
 
 If you have questions, complaints, or want to exercise your rights (e.g. access or correction), contact **tooty.fruity.tooty@gmail.com**.
@@ -29,7 +25,7 @@ If you have questions, complaints, or want to exercise your rights (e.g. access 
 
 ## 1. Who we are
 
-The "agency" operating the App for the purposes of the Privacy Act 2020 is the App's publisher (Pyrus117), contactable at **tooty.fruity.tooty@gmail.com**.
+The "agency" operating the App for the purposes of the Privacy Act 2020 is the App's publisher (Farrow Counselling / Kiwi Budget AI maintainer), contactable at **tooty.fruity.tooty@gmail.com**.
 
 The App is published from New Zealand and is primarily intended for New Zealand users (because it integrates with Akahu, the NZ open-banking aggregator). The App is available on Google Play.
 
@@ -47,6 +43,7 @@ The following data is stored exclusively on your Android device using encrypted 
 - Your **categories**, **budgets**, **goals**, **subscriptions**, and any manual category overrides
 - **Receipt images and PDFs** you attach to transactions. When you choose to attach a receipt, the App reads the photo, image, or PDF you select (via your device's camera or photo library) and stores it inside the App's own private data folder. Receipts never leave your device.
 - **Notification preferences and budget-alert state** used to schedule spending alerts. Notifications are composed and fired entirely on your device. No notification content is sent off-device.
+- **Premium status** — your Pro subscription entitlement is determined by querying RevenueCat each time the App starts or you make a purchase. It is not persistently stored as a separate on-device record; it is derived from RevenueCat's live entitlement check.
 
 We have no servers that hold this data. If you uninstall the App or use the in-app "Clear local credentials" option in Settings, this data is removed from your device.
 
@@ -58,8 +55,9 @@ The App requests the following Android permissions to support the features above
 
 ### 2.2 Information we (or our processors) do receive
 
-- **Authentication identifiers**: when you sign in with Google, Firebase Authentication (operated by Google) provides us with your unique Firebase user ID and the email address associated with your Google account. We use this only to keep your in-app settings tied to your account.
-- **Bug reports**: any text you type into the "Report a bug" form in Settings, plus a small block of diagnostic information (operating system, app version, user agent string, your Firebase user ID and email so we can reply). We store these in a Firebase Firestore collection that is **not readable from any device** — only the developer can read them, via the Firebase admin console.
+- **Authentication identifiers**: when you sign in with Google, Firebase Authentication (operated by Google) provides us with your unique Firebase user ID and the email address associated with your Google account. We use this only to keep your in-app settings tied to your account. These records are stored on Google's Firebase servers.
+- **Bug reports**: any text you type into the "Report a bug" form in Settings, plus a small block of diagnostic information (operating system, app version, user agent string, your Firebase user ID and email so we can reply). We store these in a Firebase Firestore collection that is **not readable from any device** — only the developer can read them, via the Firebase admin console. Bug reports are retained for up to 24 months.
+- **Subscription data (Kiwi Budget Pro)**: when you subscribe to the Pro plan, RevenueCat (our subscription management provider) receives an anonymised app user ID and your Google Play purchase token. RevenueCat processes this data to validate your subscription, handle renewals, and determine your entitlement status. RevenueCat's privacy policy is at https://www.revenuecat.com/privacy. The App reads your entitlement status directly from RevenueCat to determine whether to show ads and unlock Pro features. Your bank data, Akahu tokens, and Gemini key are **never** shared with RevenueCat.
 - **Crash and ad-serving signals** collected by Google AdMob when the App shows ads. See section 6.
 
 ### 2.3 Information sent to third parties when you use specific features
@@ -111,6 +109,7 @@ We use personal information only for the purpose for which it was collected (sec
 ### IPP 11 — Disclosure of personal information
 We do not disclose personal information to third parties except:
 - to Google, in its capacity as our authentication provider (Firebase Auth), database provider (Firestore for bug reports), and ad network (AdMob);
+- to RevenueCat, which processes subscription purchase tokens and anonymised app user IDs to manage Pro plan subscriptions;
 - to Akahu, only when you initiate a call from your device using tokens you supplied;
 - when required by law.
 
@@ -138,15 +137,17 @@ The App's WebView uses local storage to hold the cached items listed in section 
 
 ---
 
-## 6. Advertising (Google AdMob)
+## 6. Advertising (Google AdMob) and Premium Opt-Out
 
-The App displays a banner ad at the top of the screen via Google AdMob. AdMob may collect:
+The App displays a banner ad at the top of the screen via Google AdMob **unless you are a Pro subscriber**. Pro subscribers do not see any advertisements. AdMob may collect:
 
 - An advertising identifier provided by your device (you can reset or limit this in Android Settings → Privacy → Ads);
 - Coarse usage information (impressions, clicks, IP-derived approximate location, device model);
-- Other signals described in Google's privacy policy at <https://policies.google.com/privacy>.
+- Other signals described in Google's privacy policy at https://policies.google.com/privacy.
 
 AdMob operates as an independent controller for the data it collects. You can opt out of personalised advertising in your Google Account settings or via the Android device's ad-personalisation toggle. The App requests non-personalised ads where possible.
+
+If you subscribe to Kiwi Budget Pro, the AdMob SDK is disabled entirely and no advertising data is collected after subscription activation.
 
 ---
 
@@ -156,8 +157,9 @@ You have the right to:
 
 1. Ask what personal information we hold about you (IPP 6).
 2. Ask us to correct that information (IPP 7).
-3. Withdraw consent and request deletion of off-device data we hold about you.
-4. Complain to the Office of the Privacy Commissioner (<https://www.privacy.org.nz/>) if you believe we have breached the Privacy Act.
+3. Withdraw consent and request deletion of off-device data we hold about you (Firebase auth record, bug reports). Use the in-app "Delete my account" option in Settings or email us.
+4. Cancel your Pro subscription at any time through Google Play Store → Subscriptions. Cancellation stops future billing but does not refund previous charges unless required by law.
+5. Complain to the Office of the Privacy Commissioner (https://www.privacy.org.nz/) if you believe we have breached the Privacy Act.
 
 Contact us first at **tooty.fruity.tooty@gmail.com** — we aim to resolve concerns within 20 working days.
 
@@ -171,7 +173,7 @@ If we become aware of a privacy breach that is likely to cause serious harm to y
 
 ## 9. Changes to this policy
 
-We may update this policy from time to time. Material changes will be highlighted in the App's release notes. The current published version is always available at **<https://pyrus117.github.io/kiwibudgetai.github.io/>** and is also linked from the App's Settings page.
+We may update this policy from time to time. Material changes will be highlighted in the App's release notes. The current published version is always available at **https://pyrus117.github.io/kiwibudgetai.github.io/** and is also linked from the App's Settings page.
 
 ---
 
@@ -183,4 +185,4 @@ Email: **tooty.fruity.tooty@gmail.com**
 For privacy complaints you may also contact:
 **Office of the Privacy Commissioner**
 PO Box 10094, Wellington 6143
-<https://www.privacy.org.nz/>
+https://www.privacy.org.nz/
