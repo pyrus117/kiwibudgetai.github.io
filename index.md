@@ -11,13 +11,14 @@ If you would prefer to read this policy in plain English, the **Summary** sectio
 
 ## Summary (plain English)
 
-- **Your bank data stays on your phone.** The App connects to your bank accounts through Akahu using tokens that you generate yourself. Those tokens, your account balances, your transactions and all derived data (categorisations, budgets, goals) are stored **only on the device you install the App on**. We do not host them.
+- **Your bank data stays on your phone.** The App connects to your bank accounts through Akahu using tokens that you generate yourself. Those tokens, your account balances, your transactions and all derived data (categorisations, budgets, goals) are stored **only on the device you install the App on**. We do not host them. Akahu enriches your raw transaction data (merchant names, categories, logos) through their Genie pipeline before the App receives it — this enrichment happens on Akahu's servers, not ours.
 - **AI features call Google Gemini using your own API key.** When you ask the AI assistant a question, or when the App auto-categorises transactions, your transaction description and amount are sent to Google's Gemini API using a key **you** supply. We never see those requests.
 - **You sign in with your Google account.** Sign-in is handled by Google / Firebase Authentication. We receive a unique user ID and the email address you sign in with so we can keep your settings tied to your account.
 - **Ads are served by Google AdMob.** AdMob may collect a device advertising identifier subject to Google's privacy policy and your device's ad personalisation settings. **Pro subscribers do not see ads** and AdMob is disabled for their accounts.
 - **Pro plan (Kiwi Budget Pro).** The App offers an optional paid subscription that removes ads and unlocks the monthly AI insight feature. Subscriptions are managed by RevenueCat, which processes purchase and renewal data through Google Play Billing. RevenueCat receives your anonymised app user ID and purchase tokens. Your bank data, Akahu tokens, and Gemini key are **never** shared with RevenueCat. Premium status is determined from your RevenueCat entitlement — we do not store it separately in the cloud.
 - **Bug reports.** If you submit a bug report from the Settings page, the text you write plus your platform/version/user agent is sent to our Firebase Firestore database. Your Akahu tokens, Gemini key, and transaction data are **never** included in bug reports.
 - **No analytics, no advertising profile built by us, no data sold.** We do not run analytics SDKs, we do not build profiles of you for advertising, and we do not sell, rent, or trade any personal information.
+- **You control your Akahu connection.** At any time, you can disconnect the App from your bank accounts via Settings → Akahu Connection → Disconnect Akahu. This calls Akahu's API to revoke our access and clears all bank data from your device. Deleting your account (Settings → Delete Account) also revokes Akahu access.
 
 If you have questions, complaints, or want to exercise your rights (e.g. access or correction), contact **tooty.fruity.tooty@gmail.com**.
 
@@ -62,7 +63,7 @@ The App requests the following Android permissions to support the features above
 
 ### 2.3 Information sent to third parties when you use specific features
 
-- When the App calls the **Akahu API** to fetch your accounts and transactions, your Akahu tokens are sent directly from your device to `api.akahu.io` over HTTPS. We do not proxy or observe these calls.
+- When the App calls the **Akahu API** to fetch your accounts and transactions, your Akahu tokens are sent directly from your device to `api.akahu.io` over HTTPS. We do not proxy or observe these calls. Akahu enriches raw bank transaction data through their Genie pipeline (merchant identification, NZFCC categorisation, merchant logos) on their own infrastructure before returning it to the App. This enrichment is a feature of Akahu's service, not a separate data transfer initiated by us.
 - When the App calls the **Google Gemini API** for chat or auto-categorisation, your Gemini API key and the request payload (the transaction descriptions/amounts being categorised, or the chat message you typed plus the financial context you have chosen to share in chat) are sent directly from your device to Google. Refer to Google's privacy policy for how Gemini processes inputs.
 
 ---
@@ -99,7 +100,7 @@ If any information we hold about you is wrong, email **tooty.fruity.tooty@gmail.
 We rely on Google for the accuracy of authentication details. For bug reports, we rely on what you submit. We do not derive analytical conclusions about you.
 
 ### IPP 9 — Retention
-- **On-device data** persists until you uninstall the App or clear it via Settings.
+- **On-device data** persists until you uninstall the App or clear it via Settings. You can also disconnect Akahu at any time (Settings → Disconnect Akahu), which revokes the App's access to your bank accounts via the Akahu API and immediately removes all locally stored transaction and account data.
 - **Firebase authentication records** persist until you ask us to delete your account.
 - **Bug reports** are retained for up to 24 months from receipt to allow follow-up, then deleted.
 
